@@ -1,0 +1,95 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{8D731067-7B2D-4B79-BBBE-EC1D4DDE7EDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{0BFC5E76-D410-42F1-96D2-C392302918FE}"
+	ProjectSection(SolutionItems) = preProject
+		Sample\Sample.accdb = Sample\Sample.accdb
+		Sample\Sample.afproj = Sample\Sample.afproj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "License", "License", "{17B62559-1F20-49E1-B59C-8EFA8D7F69F2}"
+	ProjectSection(SolutionItems) = preProject
+		License\AppFactory.licenseheader = License\AppFactory.licenseheader
+		License\MS-LPL License.txt = License\MS-LPL License.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D7F4965D-4BAB-4333-90EA-241FCE2B6550}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{EC0A0065-9B1B-4308-BF43-AE5AA461E7C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFactory.Core", "Core\AppFactory.Core.csproj", "{3742307A-4FFA-4940-AED4-766EBC9C1A43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFactory.Tasks", "Tasks\AppFactory.Tasks.csproj", "{DDC62A3B-1782-43BE-991B-6643DF1F8097}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFactory", "UI\AppFactory.csproj", "{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs06
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Core\\AppFactory.Core.csproj
+		SccProjectTopLevelParentUniqueName1 = AppFactory.sln
+		SccProjectName1 = Core
+		SccLocalPath1 = Core
+		SccProjectUniqueName2 = Tasks\\AppFactory.Tasks.csproj
+		SccProjectTopLevelParentUniqueName2 = AppFactory.sln
+		SccProjectName2 = Tasks
+		SccLocalPath2 = Tasks
+		SccProjectUniqueName3 = UI\\AppFactory.csproj
+		SccProjectTopLevelParentUniqueName3 = AppFactory.sln
+		SccProjectName3 = UI
+		SccLocalPath3 = UI
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Release|x86.ActiveCfg = Release|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|x86.ActiveCfg = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|x86.Build.0 = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Any CPU.ActiveCfg = Release|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Mixed Platforms.Build.0 = Release|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|x86.ActiveCfg = Release|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF} = {8D731067-7B2D-4B79-BBBE-EC1D4DDE7EDA}
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43} = {D7F4965D-4BAB-4333-90EA-241FCE2B6550}
+		{DDC62A3B-1782-43BE-991B-6643DF1F8097} = {EC0A0065-9B1B-4308-BF43-AE5AA461E7C6}
+	EndGlobalSection
+EndGlobal
