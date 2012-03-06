@@ -42,6 +42,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AppFactory.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight.Extras.WPF4">
       <HintPath>..\packages\MvvmLight.3.1.1\lib\net40\GalaSoft.MvvmLight.Extras.WPF4.dll</HintPath>
@@ -125,7 +128,9 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="AppFactory.ico" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\AppFactory.Core.csproj">
       <Project>{3742307A-4FFA-4940-AED4-766EBC9C1A43}</Project>

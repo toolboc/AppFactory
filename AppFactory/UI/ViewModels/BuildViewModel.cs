@@ -83,11 +83,18 @@ namespace AppFactory.ViewModels
         {
             if (BuildSettings != null)
             {
-                // Save the build settings first
-                buildService.SaveSettings(BuildSettings);
+                try
+                {
+                    // Save the build settings first
+                    buildService.SaveSettings(BuildSettings);
 
-                // Kick off the build
-                buildService.BeginBuild(BuildSettings, BuildComplete);
+                    // Kick off the build
+                    buildService.BeginBuild(BuildSettings, BuildComplete);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Build Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -99,8 +106,15 @@ namespace AppFactory.ViewModels
         /// </param>
         public void Load(string path)
         {
-            // Load the settings
-            BuildSettings = buildService.LoadSettings(path);
+            try
+            {
+                // Load the settings
+                BuildSettings = buildService.LoadSettings(path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Project Load Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
