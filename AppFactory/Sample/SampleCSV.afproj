@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="All" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <!-- 
-  This project makes use of the MSBuild Extension Pack. You can read more about that 
+  <!--
+  This project makes use of the MSBuild Extension Pack. You can read more about that
   project here: http://msbuildextensionpack.codeplex.com/
   -->
-  
+
   <UsingTask AssemblyFile="Tasks\AppFactory.Tasks.dll" TaskName="AppFactory.Tasks.DbRowsToItems" />
   <UsingTask AssemblyFile="Tasks\AppFactory.Tasks.dll" TaskName="AppFactory.Tasks.ItemToReplaceParams" />
   <UsingTask AssemblyFile="Tasks\AppFactory.Tasks.dll" TaskName="AppFactory.Tasks.OleDbExecute" />
@@ -14,13 +14,13 @@
   <UsingTask AssemblyFile="Tasks\MSBuild.ExtensionPack.dll" TaskName="MSBuild.ExtensionPack.FileSystem.Folder" />
 
 
-  <!-- 
+  <!--
   The following properties are updated dynamically by the UI tool. They can also be edited manually.
   -->
   <PropertyGroup Label="UISettings">
 
     <!-- The method used to select which applications should be built. [All, NotBuiltSince, WhereQuery or CustomQuery] -->
-    <AppSelectMethod>NotBuiltSince</AppSelectMethod>
+    <AppSelectMethod>All</AppSelectMethod>
 
     <!-- The 'WHERE' clause used to select applications when AppSelectMethod is set to 'WhereQuery' -->
     <WhereQuery>AppName='Texans'</WhereQuery>
@@ -38,23 +38,20 @@
 
   </PropertyGroup>
 
-  
-  <!-- 
-  The following properties are project settings that should be edited in this file. 
+
+  <!--
+  The following properties are project settings that should be edited in this file.
   -->
   <PropertyGroup Label="ProjectSettings">
 
     <!-- The name of the table where Application data is stored. -->
-    <AppTable Condition="'$(AppTable)'==''">Applications</AppTable>
+    <AppTable Condition="'$(AppTable)'==''">Applications.csv</AppTable>
 
     <!-- Debug or Release. -->
     <Configuration>Release</Configuration>
 
-    <!-- The name of the database file where Application data is stored. -->
-    <AppDbFile>Sample.accdb</AppDbFile>
-
     <!-- The connection string that will be used to connect to the application database. -->
-    <ConnectionString>Provider=Microsoft.ACE.OLEDB.12.0;Data Source=$(AppDbFile)</ConnectionString>
+    <ConnectionString>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=$(MSBuildProjectDirectory);Extended Properties="text;HDR=Yes;FMT=Delimited";</ConnectionString>
 
     <!-- The path where the project template can be found. -->
     <TemplatePath>Template</TemplatePath>
@@ -83,26 +80,26 @@
 
   </PropertyGroup>
 
-  
-  
+
+
   <!--
-  "LoadData" is used as a dependency below. It's function is mainly to call a custom 
-  MSBuildTask that loads rows from our database into MSBuild items that we can then 
+  "LoadData" is used as a dependency below. It's function is mainly to call a custom
+  MSBuildTask that loads rows from our database into MSBuild items that we can then
   drive the remaining build task off of.
   -->
   <Target Name="LoadData">
     <Message Text="Loading application data from the database..." />
-    
+
     <!--
-    DbRowsToItems will connect to the database found at ConnectionString and execute 
-    the statement in Query. Any rows that are returned will be converted to TaskItem 
+    DbRowsToItems will connect to the database found at ConnectionString and execute
+    the statement in Query. Any rows that are returned will be converted to TaskItem
     instances with metadata properties set to corresponding column names and values.
-    
-    TaskItem requires an ItemSpec, which is like specifying which "type" of object the 
+
+    TaskItem requires an ItemSpec, which is like specifying which "type" of object the
     item represents.
-    
-    Finally, the items that were generatred are returned via the Items output 
-    property. This property is copied to a MSBuild variable using the Output statement 
+
+    Finally, the items that were generatred are returned via the Items output
+    property. This property is copied to a MSBuild variable using the Output statement
     so that these items can be used later in the build.
     -->
     <DbRowsToItems ConnectionString="$(ConnectionString)" Query="$(AppQuery)" ItemSpec="Application">
@@ -111,21 +108,21 @@
   </Target>
 
 
-  <!-- 
-   "All" is the target that is called by default when you only pass the project name. 
-   
-   Setting DependsOnTargets="LoadData" causes LoadData to execute before this target 
+  <!--
+   "All" is the target that is called by default when you only pass the project name.
+
+   Setting DependsOnTargets="LoadData" causes LoadData to execute before this target
    can execute.
-   
-   Because Outputs includes %(Application.AppName), MSBuild will actually call this 
-   target once for each and every application instance loaded from the database in 
+
+   Because Outputs includes %(Application.AppName), MSBuild will actually call this
+   target once for each and every application instance loaded from the database in
    the LoadData target above.
    -->
   <Target Name="All" DependsOnTargets="LoadData" Outputs="$(OutputPath)\%(Application.AppName)\">
 
     <!-- Fail out in the case where there were no applications loaded -->
     <Error Code="-1" Condition="'%(Application.AppName)'==''" Text="No applications matched the search criteria." />
-    
+
     <!-- Notify of New Application -->
     <Message Text="Next Application: '%(Application.Title)'" Importance="high" />
 
@@ -155,7 +152,7 @@
     <AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyTitle="%(Application.AppName)" AssemblyProduct="%(Application.AppName)" Guid="%(Application.ProductID)" AssemblyVersion="%(Application.Version)" AssemblyFileVersion="%(Application.Version)" />
 
     <!-- Replace Values -->
-    
+
     <!-- Include the files we'd like to replace values in (detokenize) -->
     <ItemGroup>
       <DetokenizeFiles Include="$(WorkingPath)\Properties\WMAppManifest.xml" />
@@ -174,7 +171,7 @@
     <!-- Build the project -->
     <ItemGroup>
       <ProjectToBuild Include="$(WorkingPath)\$(TemplateProject)">
-        <!-- 
+        <!--
         Pass in the configuration we want.
         Force the output path to be Bin\Configuration so we know for sure where to grab the XAP file from when we're done.
         Overwrite the AssemblyName and XapFileName to match the Application.AppName
@@ -192,9 +189,10 @@
     </ItemGroup>
     <Copy SourceFiles="@(TargetsToCopy)" DestinationFolder="$(OutputPath)\%(RecursiveDir)" />
 
-    <!-- Update the LastBuilt date and time -->
+    <!-- Unable to update the LastBuilt date and time because the TEXT driver doesn't support updates.
     <Message Text="Updating LastBuilt in the database." Importance="high" />
     <OleDbExecute ConnectionString="$(ConnectionString)" TaskAction="Execute" Sql="UPDATE $(AppTable) SET LastBuilt=Now() WHERE AppName='%(Application.AppName)'" />
+    -->
 
   </Target>
 </Project>

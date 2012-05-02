@@ -5,8 +5,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{8D731067-7B2D-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{0BFC5E76-D410-42F1-96D2-C392302918FE}"
 	ProjectSection(SolutionItems) = preProject
+		Sample\Applications.csv = Sample\Applications.csv
 		Sample\Sample.accdb = Sample\Sample.accdb
 		Sample\Sample.afproj = Sample\Sample.afproj
+		Sample\SampleCSV.afproj = Sample\SampleCSV.afproj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "License", "License", "{17B62559-1F20-49E1-B59C-8EFA8D7F69F2}"
