@@ -1,0 +1,111 @@
+﻿<btr:BasePhonePage xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:btr="clr-namespace:BuiltToRoam.BaseClasses;assembly=BuiltToRoam.Core"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                   xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:UI="clr-namespace:InfoHubPhone8.UI" mc:Ignorable="d"
+                   x:Class="InfoHubPhone8.Pages.Pivot.PivotPage"
+                   SupportedOrientations="Portrait"
+                   shell:SystemTray.IsVisible="True"
+                   shell:SystemTray.Opacity="0"
+                   d:DesignHeight="696"
+                   d:DesignWidth="480"
+                   Style="{StaticResource TransitionPageStyle}">
+
+    <btr:BasePhonePage.Resources>
+        <DataTemplate x:Key="ListPaneTemplate">
+            <UI:ListTemplateSelector Content="{Binding}"
+                                                    HorizontalContentAlignment="Stretch"
+                                                    VerticalContentAlignment="Stretch">
+                <UI:ListTemplateSelector.Resources>
+                    <DataTemplate x:Name="PivotListTemplate">
+                        <UI:LazyListBox ItemTemplate="{StaticResource ActivityItemTemplate}"
+                                            d:DataContext="{Binding Source={StaticResource ActivitySampleData}}"
+                                            DataContext="{Binding List}"
+                                            Source="{Binding Activities}"
+                                            SelectionChanged="SelectionChanged"
+                                            HorizontalContentAlignment="Stretch"
+                                            Loaded="ListLoaded"
+                                            />
+                    </DataTemplate>
+                </UI:ListTemplateSelector.Resources>
+            </UI:ListTemplateSelector>
+        </DataTemplate>
+    </btr:BasePhonePage.Resources>
+
+    <btr:BasePhonePage.ApplicationBar>
+        <shell:ApplicationBar >
+            <shell:ApplicationBarIconButton IconUri="/icons/refresh.png"
+                                            Text="refresh"
+                                            Click="RefreshClick" />
+        </shell:ApplicationBar>
+    </btr:BasePhonePage.ApplicationBar>
+    
+    <btr:BasePhonePage.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal" />
+    </btr:BasePhonePage.FontFamily>
+    <btr:BasePhonePage.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal" />
+    </btr:BasePhonePage.FontSize>
+    <btr:BasePhonePage.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush" />
+    </btr:BasePhonePage.Foreground>
+    <btr:BasePhonePage.DataContext>
+        <Binding Path="PivotPageViewModel"
+                 Source="{StaticResource Locator}" />
+    </btr:BasePhonePage.DataContext>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill"
+                        ImageSource="/Images/SingleListBackground.jpg"
+                        Opacity="0.2" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!--TitlePanel contains the name of the application and page title-->
+        <controls:Pivot 
+            x:Name="ListPivot"
+            Grid.Row="0"
+                        DataContext="{Binding PivotImplementation}"
+                        Title="{Binding Definition.Title}"
+                        ItemsSource="{Binding Items}"
+                        LoadingPivotItem="LoadingPivotItemHandler">
+            <controls:Pivot.Resources>
+                <DataTemplate x:Key="PivotTemplate">
+                    <UI:MultiplePaneTemplateSelector Content="{Binding}"
+                                                                    HorizontalContentAlignment="Stretch"
+                                                                    VerticalContentAlignment="Stretch"
+                                                                    ListTemplate="{StaticResource ListPaneTemplate}" />
+                </DataTemplate>
+                <DataTemplate x:Key="PivotHeaderTemplate">
+                    <TextBlock Text="{Binding Definition.Header}" />
+                </DataTemplate>
+                <DataTemplate x:Key="TitleTemplate">
+                    <TextBlock Text="{Binding}"
+                               Margin="0,28,0,0" />
+                </DataTemplate>
+
+            </controls:Pivot.Resources>
+            <controls:Pivot.HeaderTemplate>
+                <StaticResource ResourceKey="PivotHeaderTemplate" />
+            </controls:Pivot.HeaderTemplate>
+            <controls:Pivot.TitleTemplate>
+                <StaticResource ResourceKey="TitleTemplate" />
+            </controls:Pivot.TitleTemplate>
+            <controls:Pivot.ItemTemplate>
+                <StaticResource ResourceKey="PivotTemplate" />
+            </controls:Pivot.ItemTemplate>
+
+        </controls:Pivot>
+       
+        <Grid x:Name="AdPlaceholder"
+              Grid.Row="1"
+              VerticalAlignment="Bottom" />
+    </Grid>
+
+</btr:BasePhonePage>

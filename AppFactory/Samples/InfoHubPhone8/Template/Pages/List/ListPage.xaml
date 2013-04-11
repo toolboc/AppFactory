@@ -1,0 +1,92 @@
+﻿<btr:BasePhonePage x:Class="InfoHubPhone8.Pages.List.ListPage"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:btr="clr-namespace:BuiltToRoam.BaseClasses;assembly=BuiltToRoam.Core"
+                   xmlns:UI="clr-namespace:InfoHubPhone8.UI"
+                   Orientation="Portrait"
+                   mc:Ignorable="d"
+                   SupportedOrientations="Portrait"
+                   shell:SystemTray.Opacity="0"
+                   d:DesignHeight="696"
+                   d:DesignWidth="480"
+                   shell:SystemTray.IsVisible="True">
+    
+    <btr:BasePhonePage.Resources>
+        <DataTemplate x:Key="ListPaneTemplate">
+            <UI:ListTemplateSelector Content="{Binding}"
+                                     HorizontalContentAlignment="Stretch"
+                                     VerticalContentAlignment="Stretch">
+                <UI:ListTemplateSelector.Resources>
+                    <DataTemplate x:Name="ListTemplate">
+                        <UI:LazyListBox ItemTemplate="{StaticResource ActivityItemTemplate}"
+                                        d:DataContext="{Binding Source={StaticResource ActivitySampleData}}"
+                                        DataContext="{Binding List}"
+                                        Source="{Binding Activities}"
+                                        SelectionChanged="SelectionChanged"
+                                        HorizontalContentAlignment="Stretch" />
+                    </DataTemplate>
+                </UI:ListTemplateSelector.Resources>
+            </UI:ListTemplateSelector>
+        </DataTemplate>
+    </btr:BasePhonePage.Resources>
+
+    <btr:BasePhonePage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/icons/refresh.png"
+                                            Text="refresh"
+                                            Click="RefreshClick" />
+            <shell:ApplicationBarIconButton IconUri="/icons/home.png"
+                                            Text="home"
+                                            Click="HomeClick" />
+        </shell:ApplicationBar>
+    </btr:BasePhonePage.ApplicationBar>
+
+    <btr:BasePhonePage.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal" />
+    </btr:BasePhonePage.FontFamily>
+    <btr:BasePhonePage.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal" />
+    </btr:BasePhonePage.FontSize>
+    <btr:BasePhonePage.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush" />
+    </btr:BasePhonePage.Foreground>
+    <btr:BasePhonePage.DataContext>
+        <Binding Path="ListPageViewModel"
+                 Source="{StaticResource Locator}" />
+    </btr:BasePhonePage.DataContext>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill"
+                        ImageSource="/Images/SingleListBackground.jpg"
+                        Opacity="0.2" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="TitlePanel"
+                    Grid.Row="0"
+                    Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle"
+                       Text="{Binding Implementation.Definition.Title}"
+                       Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBlock x:Name="PageTitle"
+                       Text="{Binding Implementation.Pane.List.Title}"
+                       Margin="9,-7,0,0"
+                       Style="{StaticResource PhoneTextTitle1Style}" />
+        </StackPanel>
+        <ContentControl Grid.Row="1" Content="{Binding Implementation.Pane}"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        ContentTemplate="{StaticResource ListPaneTemplate}" Margin="{StaticResource PhoneHorizontalMargin}" />
+        <Grid x:Name="AdPlaceholder"
+              Grid.Row="2"
+              VerticalAlignment="Bottom" />
+    </Grid>
+
+</btr:BasePhonePage>

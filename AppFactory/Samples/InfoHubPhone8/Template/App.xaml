@@ -1,0 +1,501 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+             xmlns:cvs="clr-namespace:BuiltToRoam.WindowsPhone.Controls.Converters;assembly=BuiltToRoam.WindowsPhone.Controls"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             xmlns:btrc="clr-namespace:BuiltToRoam.WindowsPhone.Controls;assembly=BuiltToRoam.WindowsPhone.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:toolkitPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit"
+             xmlns:BaseClasses="clr-namespace:BuiltToRoam.BaseClasses;assembly=BuiltToRoam.Core"
+             xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.ActivitySampleData"
+             xmlns:uriMapper="clr-namespace:System.Windows.Navigation;assembly=Microsoft.Phone"
+             xmlns:InfoHubPhone8="clr-namespace:InfoHubPhone8"
+             xmlns:SampleData1="clr-namespace:Expression.Blend.SampleData.ReaderPageSampleData"
+             mc:Ignorable="d"
+             x:Class="InfoHubPhone8.App">
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Configuration.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        	<SampleData1:ReaderPageSampleData x:Key="ReaderPageSampleData" d:IsDataSource="True"/>
+            <cvs:EmptyStringToVisibilityConverter x:Key="EmptyStringToVisibilityConverter" />
+            <cvs:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+            <SampleData:ActivitySampleData x:Key="ActivitySampleData"
+                                           d:IsDataSource="True" />
+            <cvs:BoolOpacityConverter x:Key="BoolOpacityConverter" />
+            <cvs:StringFormatConverter x:Key="StringFormatConverter" />
+            <cvs:BoolBoldConverter x:Key="ReadToBoldConverter" />
+
+            <uriMapper:UriMapper x:Key="UriMapper">
+                <uriMapper:UriMapping Uri="/tile"
+                                      MappedUri="/Pages/List/ListPage.xaml" />
+                <uriMapper:UriMapping Uri="/{assembly};component/{page}Page.xaml"
+                                      MappedUri="/{assembly};component/Pages/{page}/{page}Page.xaml" />
+            </uriMapper:UriMapper>
+
+            <InfoHubPhone8:ViewModelLocator x:Key="Locator"
+                                     Configuration="{StaticResource Configuration}" />
+
+            <Style x:Key="TransitionPageStyle"
+                   TargetType="BaseClasses:BasePhonePage">
+                <Setter Property="toolkit:TransitionService.NavigationInTransition">
+                    <Setter.Value>
+                        <toolkit:NavigationInTransition>
+                            <toolkit:NavigationInTransition.Backward>
+                                <toolkit:TurnstileTransition Mode="BackwardIn" />
+                            </toolkit:NavigationInTransition.Backward>
+                            <toolkit:NavigationInTransition.Forward>
+                                <toolkit:TurnstileTransition Mode="ForwardIn" />
+                            </toolkit:NavigationInTransition.Forward>
+                        </toolkit:NavigationInTransition>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="toolkit:TransitionService.NavigationOutTransition">
+                    <Setter.Value>
+                        <toolkit:NavigationOutTransition>
+                            <toolkit:NavigationOutTransition.Backward>
+                                <toolkit:TurnstileTransition Mode="BackwardOut" />
+                            </toolkit:NavigationOutTransition.Backward>
+                            <toolkit:NavigationOutTransition.Forward>
+                                <toolkit:TurnstileTransition Mode="ForwardOut" />
+                            </toolkit:NavigationOutTransition.Forward>
+                        </toolkit:NavigationOutTransition>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="PerformanceProgressBar"
+                   TargetType="ProgressBar">
+                <Setter Property="Foreground"
+                        Value="{StaticResource PhoneAccentBrush}" />
+                <Setter Property="Background"
+                        Value="{StaticResource PhoneAccentBrush}" />
+                <Setter Property="Maximum"
+                        Value="100" />
+                <Setter Property="IsHitTestVisible"
+                        Value="False" />
+                <Setter Property="Padding"
+                        Value="{StaticResource PhoneHorizontalMargin}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ProgressBar">
+                            <toolkitPrimitives:RelativeAnimatingContentControl HorizontalContentAlignment="Stretch"
+                                                                               VerticalContentAlignment="Stretch">
+                                <toolkitPrimitives:RelativeAnimatingContentControl.Resources>
+                                    <ExponentialEase EasingMode="EaseOut"
+                                                     Exponent="1"
+                                                     x:Key="ProgressBarEaseOut" />
+                                    <ExponentialEase EasingMode="EaseIn"
+                                                     Exponent="1"
+                                                     x:Key="ProgressBarEaseIn" />
+                                </toolkitPrimitives:RelativeAnimatingContentControl.Resources>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Determinate" />
+                                        <VisualState x:Name="Indeterminate">
+                                            <Storyboard RepeatBehavior="Forever"
+                                                        Duration="00:00:04.4">
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                               Storyboard.TargetName="IndeterminateRoot">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Visible</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                               Storyboard.TargetName="DeterminateRoot">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.0"
+                                                                               Storyboard.TargetProperty="X"
+                                                                               Storyboard.TargetName="R1TT">
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:00.0"
+                                                                          Value="0.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:00.5"
+                                                                          Value="33.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseOut}" />
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:02.0"
+                                                                          Value="66.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                          Value="100.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseIn}" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.2"
+                                                                               Storyboard.TargetProperty="X"
+                                                                               Storyboard.TargetName="R2TT">
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:00.0"
+                                                                          Value="0.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:00.5"
+                                                                          Value="33.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseOut}" />
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:02.0"
+                                                                          Value="66.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                          Value="100.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseIn}" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.4"
+                                                                               Storyboard.TargetProperty="X"
+                                                                               Storyboard.TargetName="R3TT">
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:00.0"
+                                                                          Value="0.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:00.5"
+                                                                          Value="33.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseOut}" />
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:02.0"
+                                                                          Value="66.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                          Value="100.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseIn}" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.6"
+                                                                               Storyboard.TargetProperty="X"
+                                                                               Storyboard.TargetName="R4TT">
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:00.0"
+                                                                          Value="0.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:00.5"
+                                                                          Value="33.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseOut}" />
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:02.0"
+                                                                          Value="66.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                          Value="100.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseIn}" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.8"
+                                                                               Storyboard.TargetProperty="X"
+                                                                               Storyboard.TargetName="R5TT">
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:00.0"
+                                                                          Value="0.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:00.5"
+                                                                          Value="33.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseOut}" />
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:02.0"
+                                                                          Value="66.1" />
+                                                    <EasingDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                          Value="100.1"
+                                                                          EasingFunction="{StaticResource ProgressBarEaseIn}" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.0"
+                                                                               Storyboard.TargetProperty="Opacity"
+                                                                               Storyboard.TargetName="R1">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0"
+                                                                            Value="1" />
+                                                    <DiscreteDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                            Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.2"
+                                                                               Storyboard.TargetProperty="Opacity"
+                                                                               Storyboard.TargetName="R2">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0"
+                                                                            Value="1" />
+                                                    <DiscreteDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                            Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.4"
+                                                                               Storyboard.TargetProperty="Opacity"
+                                                                               Storyboard.TargetName="R3">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0"
+                                                                            Value="1" />
+                                                    <DiscreteDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                            Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.6"
+                                                                               Storyboard.TargetProperty="Opacity"
+                                                                               Storyboard.TargetName="R4">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0"
+                                                                            Value="1" />
+                                                    <DiscreteDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                            Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.8"
+                                                                               Storyboard.TargetProperty="Opacity"
+                                                                               Storyboard.TargetName="R5">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0"
+                                                                            Value="1" />
+                                                    <DiscreteDoubleKeyFrame KeyTime="00:00:02.5"
+                                                                            Value="0" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid>
+                                    <Grid x:Name="DeterminateRoot"
+                                          Margin="{TemplateBinding Padding}"
+                                          Visibility="Visible">
+                                        <Rectangle x:Name="ProgressBarTrack"
+                                                   Fill="{TemplateBinding Background}"
+                                                   Height="4"
+                                                   Opacity="0.1" />
+                                        <Rectangle x:Name="ProgressBarIndicator"
+                                                   Fill="{TemplateBinding Foreground}"
+                                                   HorizontalAlignment="Left"
+                                                   Height="4" />
+                                    </Grid>
+                                    <Border x:Name="IndeterminateRoot"
+                                            Margin="{TemplateBinding Padding}"
+                                            Visibility="Collapsed">
+                                        <Grid HorizontalAlignment="Left">
+                                            <Rectangle Fill="{TemplateBinding Foreground}"
+                                                       Height="4"
+                                                       IsHitTestVisible="False"
+                                                       Width="4"
+                                                       x:Name="R1"
+                                                       Opacity="0"
+                                                       CacheMode="BitmapCache">
+                                                <Rectangle.RenderTransform>
+                                                    <TranslateTransform x:Name="R1TT" />
+                                                </Rectangle.RenderTransform>
+                                            </Rectangle>
+                                            <Rectangle Fill="{TemplateBinding Foreground}"
+                                                       Height="4"
+                                                       IsHitTestVisible="False"
+                                                       Width="4"
+                                                       x:Name="R2"
+                                                       Opacity="0"
+                                                       CacheMode="BitmapCache">
+                                                <Rectangle.RenderTransform>
+                                                    <TranslateTransform x:Name="R2TT" />
+                                                </Rectangle.RenderTransform>
+                                            </Rectangle>
+                                            <Rectangle Fill="{TemplateBinding Foreground}"
+                                                       Height="4"
+                                                       IsHitTestVisible="False"
+                                                       Width="4"
+                                                       x:Name="R3"
+                                                       Opacity="0"
+                                                       CacheMode="BitmapCache">
+                                                <Rectangle.RenderTransform>
+                                                    <TranslateTransform x:Name="R3TT" />
+                                                </Rectangle.RenderTransform>
+                                            </Rectangle>
+                                            <Rectangle Fill="{TemplateBinding Foreground}"
+                                                       Height="4"
+                                                       IsHitTestVisible="False"
+                                                       Width="4"
+                                                       x:Name="R4"
+                                                       Opacity="0"
+                                                       CacheMode="BitmapCache">
+                                                <Rectangle.RenderTransform>
+                                                    <TranslateTransform x:Name="R4TT" />
+                                                </Rectangle.RenderTransform>
+                                            </Rectangle>
+                                            <Rectangle Fill="{TemplateBinding Foreground}"
+                                                       Height="4"
+                                                       IsHitTestVisible="False"
+                                                       Width="4"
+                                                       x:Name="R5"
+                                                       Opacity="0"
+                                                       CacheMode="BitmapCache">
+                                                <Rectangle.RenderTransform>
+                                                    <TranslateTransform x:Name="R5TT" />
+                                                </Rectangle.RenderTransform>
+                                            </Rectangle>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </toolkitPrimitives:RelativeAnimatingContentControl>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ItemsPanelTemplate x:Key="HorizontalItemsPanelTemplate">
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+            <DataTemplate x:Key="ActivityItemTemplate">
+                <Grid Margin="0,0,0,24"
+                      Width="420"
+                      d:DataContext="{Binding Activities[0], Source={StaticResource ActivitySampleData}}"
+                      HorizontalAlignment="Right"
+                      Opacity="{Binding NotRead, ConverterParameter=0.6, Converter={StaticResource BoolOpacityConverter}}"
+                      toolkit:TiltEffect.IsTiltEnabled="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding SocialActivity.Author}"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                               Grid.ColumnSpan="2" />
+                    <btrc:HtmlTextBlock LinksEnabled="false"
+                                        Text="{Binding SocialActivity.Title}"
+                                        MaxTextLength="250"
+                                        Grid.Row="1"
+                                        FontSize="{StaticResource PhoneFontSizeNormal}"
+                                        Visibility="{Binding SocialActivity.Title, Converter={StaticResource EmptyStringToVisibilityConverter}}"
+                                        MaxHeight="60"
+                                        Margin="{StaticResource PhoneHorizontalMargin}"
+                                        Foreground="{StaticResource PhoneForegroundBrush}"
+                                        Grid.ColumnSpan="2" />
+
+                	<Grid Visibility="{Binding ImagesExist, Converter={StaticResource BoolVisibilityConverter}}"
+                		Grid.Row="2">
+                		<Image DataContext="{Binding FirstImage}"
+                			Width="50"
+                			Height="50"
+                			Stretch="UniformToFill"
+                			HorizontalAlignment="Left"
+                			Margin="12,8,0,0"
+                			btrc:LowProfileImageLoader.UriSource="{Binding IconUrl}" VerticalAlignment="Top" />
+                		<!--btrc:LowProfileImageLoader.Uri-->
+                	</Grid>
+
+                    <btrc:HtmlTextBlock LinksEnabled="false"
+                                        Text="{Binding SocialActivity.Description}"
+                                        Visibility="{Binding SocialActivity.Description, Converter={StaticResource EmptyStringToVisibilityConverter}}"
+                                        MaxTextLength="250"
+                                        Grid.Row="2"
+                                        FontSize="{StaticResource PhoneFontSizeNormal}"
+                                        MaxHeight="85"
+                                        Margin="{StaticResource PhoneHorizontalMargin}"
+                                        Foreground="{StaticResource PhoneForegroundBrush}"
+                                        Grid.Column="1" />
+                    <TextBlock Grid.Row="4"
+                               Text="{Binding ActivitySourceAndTime}"
+                               Style="{StaticResource PhoneTextSubtleStyle}"
+                               FontWeight="{Binding Read, ConverterParameter=invert, Converter={StaticResource ReadToBoldConverter}}"
+                               Grid.ColumnSpan="2" />
+                    <Border BorderBrush="Black"
+                            BorderThickness="1"
+                            Grid.RowSpan="5"
+                            Background="{StaticResource PhoneDisabledBrush}"
+                            d:DataContext="{Binding Source={StaticResource ActivitySampleData}}"
+                            Visibility="{Binding TrialModeOver, Converter={StaticResource BoolVisibilityConverter}}"
+                            Margin="0,0,0,-6"
+                            Grid.ColumnSpan="2" />
+                    <TextBlock TextWrapping="Wrap"
+                               Text="Trial Period Over"
+                               d:DataContext="{Binding Source={StaticResource ActivitySampleData}}"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                               Visibility="{Binding TrialModeOver, Converter={StaticResource BoolVisibilityConverter}}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               RenderTransformOrigin="0.5,0.5"
+                               Grid.RowSpan="5"
+                               Foreground="{StaticResource PhoneBackgroundBrush}"
+                               FontWeight="Bold"
+                               Grid.ColumnSpan="2">
+    				<TextBlock.RenderTransform>
+    					<CompositeTransform Rotation="-11" />
+    				</TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+            </DataTemplate>
+            <!--    	<DataTemplate x:Key="EnclosureTemplate">
+    		<Grid Tag="{Binding Url}">
+    			<Grid.ColumnDefinitions>
+    				<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>			
+				</Grid.ColumnDefinitions>
+    			<Image Source="{Binding ImageUrl}" Width="50" Height="50"/>
+    			<TextBlock Grid.Column="1" Text="{Binding Caption}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" VerticalAlignment="Top"/>
+    		</Grid>
+    	</DataTemplate>
+    	<DataTemplate x:Key="FacebookEnclosureItemTemplate">
+    		<Grid Margin="0,0,0,24"
+    			HorizontalAlignment="Right"
+    			Width="420"
+    			toolkit:TiltEffect.IsTiltEnabled="True">
+    			<Grid.Background>
+    				<LinearGradientBrush EndPoint="0.5,1"
+    					StartPoint="0.5,0">
+    					<GradientStop Color="#19000000"
+    						Offset="0" />
+    					<GradientStop Color="#19FFFFFF"
+    						Offset="1" />
+    				</LinearGradientBrush>
+    			</Grid.Background>
+    			<Grid.RowDefinitions>
+    				<RowDefinition Height="Auto" />
+    				<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+    			</Grid.RowDefinitions>
+    			<Grid.ColumnDefinitions>
+    				<ColumnDefinition Width="Auto" />
+    				<ColumnDefinition Width="*" />
+    				<ColumnDefinition Width="Auto" />
+    			</Grid.ColumnDefinitions>
+    			<BuiltToRoam_WindowsPhone_Controls:HtmlTextBlock LinksEnabled="false"
+    				Grid.ColumnSpan="3"
+    				Text="{Binding SocialActivity.Title}"
+    				Margin="0,0,0,3"
+    				MaxTextLength="250"
+    				FontSize="24" />
+    			<TextBlock Grid.Row="1"
+    				Grid.Column="1"
+    				Text="{Binding SocialActivity.TimeStamp, ConverterParameter=\{0:h:mm tt ddd d MMM\}, Converter={StaticResource StringFormatConverter}}"
+    				Style="{StaticResource PhoneTextSmallStyle}"
+    				FontSize="16"
+    				VerticalAlignment="Center" FontWeight="{Binding SocialActivity.Read, ConverterParameter=invert, Converter={StaticResource ReadToBoldConverter}}" />
+    			<TextBlock Grid.Row="1"
+    				Grid.Column="2"
+    				Text="{Binding SocialActivity.Author}"
+    				VerticalAlignment="Center"
+    				Foreground="{StaticResource PhoneAccentBrush}" />
+    			<Image Grid.Row="1"
+    				Source="{Binding SocialActivity.SourceImage}"
+    				Height="24"
+    				VerticalAlignment="Center" Visibility="{Binding SocialActivity.NotReadVisibility}" />
+    			<Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="3" Background="{StaticResource PhoneDisabledBrush}" Grid.ColumnSpan="3" Visibility="{Binding TrialModeOverVisibility}"/>
+    			<TextBlock Grid.ColumnSpan="3" TextWrapping="Wrap" Text="Trial Period Over" d:LayoutOverrides="Width" 
+				Style="{StaticResource PhoneTextLargeStyle}"  Visibility="{Binding TrialModeOverVisibility}" 
+				VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" 
+				Grid.RowSpan="3" Foreground="{StaticResource PhoneBackgroundBrush}" FontWeight="Bold">
+    				<TextBlock.RenderTransform>
+    					<CompositeTransform Rotation="-11"/>
+    				</TextBlock.RenderTransform>
+    			</TextBlock>
+				<ItemsControl ItemTemplate="{StaticResource EnclosureTemplate}" ItemsSource="{Binding SocialActivity.Enclosures}" Margin="24,0" Grid.Row="2" Grid.ColumnSpan="3">
+					
+				</ItemsControl>
+    		</Grid>
+    	</DataTemplate>-->
+            <ItemsPanelTemplate x:Key="TiledPanelTemplate">
+                <toolkit:WrapPanel Orientation="Vertical"
+                                   Margin="12,7,12,0" />
+            </ItemsPanelTemplate>
+            <DataTemplate x:Key="TiledTemplate">
+                <Grid Visibility="{Binding ImagesExist, Converter={StaticResource BoolVisibilityConverter}}">
+                    <toolkit:HubTile Source="{Binding ImageEnclosures[0].ImageUrl}"
+                                     Title="{Binding SocialActivity.Title}"
+                                     Margin="0,0,12,12"
+                                     HorizontalAlignment="Right"
+                                     Width="180"
+                                     Height="180"
+                                     toolkit:TiltEffect.IsTiltEnabled="True" />
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="LinkTemplate">
+                <TextBlock Text="{Binding Title}"
+                           Style="{StaticResource PhoneTextExtraLargeStyle}"
+                           Margin="12,0,12,6"
+                           toolkit:TiltEffect.IsTiltEnabled="True" />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService Launching="ApplicationLaunching"
+                                       Closing="ApplicationClosing"
+                                       Activated="ApplicationActivated"
+                                       Deactivated="ApplicationDeactivated" />
+    </Application.ApplicationLifetimeObjects>
+
+</Application>
