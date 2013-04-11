@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:InfoHub.Styles">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Shared.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Name="YouTubeTemplateNormal">
+        <Grid Width="250"
+              Height="250"
+              Background="{StaticResource SecondaryBrush}">
+            <Image VerticalAlignment="Top"
+                   Source="{Binding Image}"
+                   Stretch="UniformToFill" />
+            <StackPanel VerticalAlignment="Bottom">
+                <Polygon Fill="{StaticResource SecondaryBrush}" Points="0,30 250,30 250,0" />
+                <Grid Background="{StaticResource SecondaryBrush}">
+                    <TextBlock MaxHeight="85"
+                               Margin="10,5,10,20"
+                               FontSize="20"
+                               Foreground="{StaticResource SecondaryContrastBrush}"
+                               TextTrimming="WordEllipsis"
+                               TextWrapping="Wrap">
+                        <Run Text="{Binding Date, Converter={StaticResource DateStringConverter}, ConverterParameter='ddd. MMM d'}" />
+                        |<Run Text="{Binding Title}" />
+                    </TextBlock>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Name="YouTubeTemplateHero">
+        <Grid Width="500"
+              Height="500"
+              Background="{StaticResource SecondaryBrush}">
+            <Image VerticalAlignment="Top"
+                   Source="{Binding Image}"
+                   Stretch="UniformToFill" />
+            <StackPanel VerticalAlignment="Bottom">
+                <Polygon Fill="{StaticResource SecondaryBrush}" Points="0,30 500,30 500,0" />
+                <Grid Background="{StaticResource SecondaryBrush}">
+                    <TextBlock MaxHeight="85"
+                               Margin="10,5,10,20"
+                               FontSize="20"
+                               Foreground="{StaticResource SecondaryContrastBrush}"
+                               TextTrimming="WordEllipsis"
+                               TextWrapping="Wrap">
+                        <Run Text="{Binding Date, Converter={StaticResource DateStringConverter}, ConverterParameter='ddd. MMM d'}" />
+                        |<Run Text="{Binding Title}" />
+                    </TextBlock>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

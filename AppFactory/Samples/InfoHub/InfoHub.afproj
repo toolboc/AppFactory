@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="All" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- 
+  This project makes use of the MSBuild Extension Pack. You can read more about that 
+  project here: http://msbuildextensionpack.codeplex.com/
+  -->
+  
+  <UsingTask AssemblyFile="Tasks\AppFactory.Tasks.dll" TaskName="AppFactory.Tasks.DbRowsToItems" />
+  <UsingTask AssemblyFile="Tasks\AppFactory.Tasks.dll" TaskName="AppFactory.Tasks.ItemToReplaceParams" />
+  <UsingTask AssemblyFile="Tasks\AppFactory.Tasks.dll" TaskName="AppFactory.Tasks.OleDbExecute" />
+  <UsingTask AssemblyFile="Tasks\MSBuild.ExtensionPack.dll" TaskName="MSBuild.ExtensionPack.FileSystem.Folder" />
+  <UsingTask AssemblyFile="Tasks\MSBuild.ExtensionPack.dll" TaskName="MSBuild.ExtensionPack.Xml.XmlFile" />
+  <UsingTask AssemblyFile="Tasks\MSBuild.ExtensionPack.dll" TaskName="MSBuild.ExtensionPack.Compression.Zip" />
+  <UsingTask AssemblyFile="Tasks\MSBuild.ExtensionPack.dll" TaskName="MSBuild.ExtensionPack.FileSystem.Detokenise" />
+
+  <!-- 
+  The following properties are updated dynamically by the UI tool. They can also be edited manually.
+  -->
+  <PropertyGroup Label="UISettings">
+
+    <!-- The method used to select which applications should be built. [All, NotBuiltSince, WhereQuery or CustomQuery] -->
+    <AppSelectMethod>WhereQuery</AppSelectMethod>
+
+    <!-- The 'WHERE' clause used to select applications when AppSelectMethod is set to 'WhereQuery' -->
+    <WhereQuery>AppName='LouisianaStateUniversity'</WhereQuery>
+
+    <!-- The custom query used to select applications when AppSelectMethod is set to 'CustomQuery' -->
+    <CustomQuery>SELECT * FROM Applications</CustomQuery>
+
+    <!-- The date used to select applications when AppSelectMethod is set to 'NotBuiltSince' -->
+    <!-- The UI front-end stores this value as UTC time so that times will be correct even across timezones. -->
+    <!-- Locally formatted values (e.g. '1/22/2012 4:32 PM') are acceptable but will not account for timezone changes. -->
+    <DateQuery>2011-12-27T06:00:00Z</DateQuery>
+
+    <!-- The verbosity of the build when started from the UI tool. [Quiet, Minimal, Normal, Detailed, Diagnostic]  -->
+    <Verbosity>Minimal</Verbosity>
+
+  </PropertyGroup>
+
+  
+  <!-- 
+  The following properties are project settings that should be edited in this file. 
+  -->
+  <PropertyGroup Label="ProjectSettings">
+
+    <!-- The name of the table where Application data is stored. -->
+    <AppTable Condition="'$(AppTable)'==''">Applications</AppTable>
+
+    <!-- Debug or Release. -->
+    <Configuration>Release</Configuration>
+
+    <!-- The name of the database file where Application data is stored. -->
+    <AppDbFile>InfoHub.accdb</AppDbFile>
+
+    <!-- The connection string that will be used to connect to the application database. -->
+    <ConnectionString>Provider=Microsoft.ACE.OLEDB.12.0;Data Source=$(AppDbFile)</ConnectionString>
+
+    <!-- The path where the project template can be found. -->
+    <TemplatePath>Template</TemplatePath>
+
+	<!-- The name of the template project file that will be build for each application. -->
+    <TemplateProject>InfoHub.csproj</TemplateProject>
+	
+    <!-- The path where non-archive assets can be found. -->
+    <AssetsPath>Assets</AssetsPath>
+
+    <!-- The path that will be used for extracting, combining assets and building. -->
+    <WorkingPath>Working</WorkingPath>
+
+    <!-- The path that will be used for completed builds. -->
+    <OutputPath>Output</OutputPath>
+
+    <!-- The DateQuery parameter above is stored in UTC but Access is very picky about the format of dates passed to it. -->
+    <!-- This method converts the DateQuery stored above it into the format Access needs. This step can be skipped for SQL Server. -->
+    <AccessDateQuery>$([System.DateTime]::Parse($(DateQuery)).ToString("yyyy-MM-dd HH:mm:ss"))</AccessDateQuery>
+
+    <!-- The SQL statement that will be used to obtain Application data. This is driven from the properties in the 'UISettings' property group above. -->
+    <AppQuery Condition="'$(AppSelectMethod)'=='All'">SELECT * FROM $(AppTable)</AppQuery>
+    <AppQuery Condition="'$(AppSelectMethod)'=='CustomQuery'">$(CustomQuery)</AppQuery>
+    <AppQuery Condition="'$(AppSelectMethod)'=='NotBuiltSince'">SELECT * FROM $(AppTable) WHERE LastBuilt IS NULL OR LastBuilt &lt;= #$(AccessDateQuery)#</AppQuery>
+    <AppQuery Condition="'$(AppSelectMethod)'=='WhereQuery'">SELECT * FROM $(AppTable) WHERE $(WhereQuery)</AppQuery>
+
+  </PropertyGroup>
+
+  
+  
+  <!--
+  "LoadData" is used as a dependency below. It's function is mainly to call a custom 
+  MSBuildTask that loads rows from our database into MSBuild items that we can then 
+  drive the remaining build task off of.
+  -->
+  <Target Name="LoadData">
+    <Message Text="Loading application data from the database..." />
+    
+    <!--
+    DbRowsToItems will connect to the database found at ConnectionString and execute 
+    the statement in Query. Any rows that are returned will be converted to TaskItem 
+    instances with metadata properties set to corresponding column names and values.
+    
+    TaskItem requires an ItemSpec, which is like specifying which "type" of object the 
+    item represents.
+    
+    Finally, the items that were generatred are returned via the Items output 
+    property. This property is copied to a MSBuild variable using the Output statement 
+    so that these items can be used later in the build.
+    -->
+    <DbRowsToItems ConnectionString="$(ConnectionString)" Query="$(AppQuery)" ItemSpec="Application">
+      <Output TaskParameter="Items" ItemName="Application" />
+    </DbRowsToItems>
+  </Target>
+
+
+  <!-- 
+   "All" is the target that is called by default when you only pass the project name. 
+   
+   Setting DependsOnTargets="LoadData" causes LoadData to execute before this target 
+   can execute.
+   
+   Because Outputs includes %(Application.AppName), MSBuild will actually call this 
+   target once for each and every application instance loaded from the database in 
+   the LoadData target above.
+   -->
+  <Target Name="All" DependsOnTargets="LoadData" Outputs="$(OutputPath)\%(Application.AppName)\">
+
+    <!-- Fail out in the case where there were no applications loaded -->
+    <Error Code="-1" Condition="'%(Application.AppName)'==''" Text="No applications matched the search criteria." />
+    
+    <!-- Notify of New Application -->
+    <Message Text="Next Application: '%(Application.Title)'" Importance="high" />
+
+    <!-- Clean the Workspace -->
+    <Message Text="Clearing workspace" Importance="high" />
+    <Folder TaskAction="RemoveContent" Path="$(WorkingPath)" />
+	
+	<!-- Copy the template over -->
+    <Message Text="Copying template to workspace" Importance="high" />
+    <ItemGroup>
+      <TemplateFiles Include="$(TemplatePath)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(TemplateFiles)" DestinationFolder="$(WorkingPath)\%(RecursiveDir)" />
+
+    <!-- Copy application-specific assets -->
+    <Message Text="Copying application-specifc assets into workspace ($(AssetsPath)\%(Application.AppName))" Importance="high" />
+    <ItemGroup>
+      <AssetFiles Include="$(AssetsPath)\%(Application.AppName)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(AssetFiles)" DestinationFolder="$(WorkingPath)\$(AssetsPath)\%(RecursiveDir)" />
+    
+	<!-- Replace Values -->
+    
+    <!-- Include the files we'd like to replace values in (detokenize) -->
+    <ItemGroup>
+      <DetokenizeFiles Include="$(WorkingPath)\Package.appxmanifest" />
+	  <DetokenizeFiles Include="$(WorkingPath)\Package.StoreAssociation.xml" />
+	  <DetokenizeFiles Include="$(WorkingPath)\AppHubViewModel.1.cs" />
+	  <DetokenizeFiles Include="$(WorkingPath)\Styles\Shared.xaml" />
+	  <DetokenizeFiles Include="$(WorkingPath)\Styles\AdvertArticle.xaml" />
+    </ItemGroup>
+    <Message Text="Injecting Application.* values into %(DetokenizeFiles.Identity)" Importance="high" />
+
+    <!-- Use properties from the current Application item as replacement parameters with the 'Application.' prefix -->
+    <ItemToReplaceParams SourceItem="@(Application)" Prefix="Application.">
+      <Output TaskParameter="ReplacementValues" ItemName="ReplacementValues" />
+    </ItemToReplaceParams>
+
+    <!-- Actually replace values (detokenize) -->
+    <Detokenise TaskAction="Detokenise" TargetFiles="@(DetokenizeFiles)" ReplacementValues="@(ReplacementValues)" />	
+	
+	<!-- AppX Settings -->
+    <Message Text="Setting AppX Settings" Importance="high" />
+    <PropertyGroup>
+      <AppxPackageDir>AppPackages\</AppxPackageDir>
+      <AppxPackageName>%(Application.AppName)</AppxPackageName>
+      <AppxStoreContainer>$(AppxPackageDir)$(AppxPackageName).appxupload</AppxStoreContainer>
+    </PropertyGroup>
+    <Message Text="Container: $(AppxStoreContainer)" Importance="high" />
+	
+    <!-- Build the project -->
+    <ItemGroup>
+      <ProjectToBuild Include="$(WorkingPath)\$(TemplateProject)">
+        <!-- 
+        Pass in the configuration we want.
+        Force the output path to be Bin\Configuration so we know for sure where to grab the XAP file from when we're done.
+        Overwrite the AppX settings so we are sure to know the output file locations.
+        -->
+        <Properties>Configuration=$(Configuration);OutputPath=Bin\$(Configuration);AppxPackageDir=$(AppxPackageDir);AppxPackageName=$(AppxPackageName);AppxStoreContainer=$(AppxStoreContainer)</Properties>
+      </ProjectToBuild>
+    </ItemGroup>
+    <Message Text="Building %(ProjectToBuild.Identity)" Importance="high" />
+
+    <MSBuild Projects="@(ProjectToBuild)" />
+
+    <!-- Copy build targets to output folder -->
+    <Message Text="Copying targets to output folder." Importance="high" />
+    <ItemGroup>
+      <TargetsToCopy Include="$(WorkingPath)\$(AppxPackageDir)\**" />
+    </ItemGroup>
+    <Copy SourceFiles="@(TargetsToCopy)" DestinationFolder="$(OutputPath)\%(RecursiveDir)" />
+
+    <!-- Update the LastBuilt date and time -->
+    <Message Text="Updating LastBuilt in the database." Importance="high" />
+    <OleDbExecute ConnectionString="$(ConnectionString)" TaskAction="Execute" Sql="UPDATE $(AppTable) SET LastBuilt=Now() WHERE AppName='%(Application.AppName)'" />
+
+  </Target>
+</Project>

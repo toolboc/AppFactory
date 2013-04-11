@@ -1,0 +1,47 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InfoHub.Styles">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Shared.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Name="CalendarTemplateNormal">
+        <Grid Width="375"
+              Height="125"
+              Background="{StaticResource SecondaryBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="125" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Margin="0" Background="{StaticResource PrimaryBrush}">
+                <TextBlock Margin="15,0,0,5"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontSize="20"
+                           Foreground="{StaticResource SecondaryBrush}"
+                           RenderTransformOrigin="0,0.5"
+                           Text="{Binding Date, Converter={StaticResource DateStringConverter}, ConverterParameter='MMM yyy'}">
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform Rotation="-90" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Margin="0,0,5,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           FontFamily="Global User Interface"
+                           FontSize="75"
+                           Text="{Binding Date.Day}" />
+            </Grid>
+            <TextBlock Grid.Column="1"
+                       Margin="10,0,25,0"
+                       MaxHeight="90"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontSize="30"
+                       Text="{Binding Title}"
+                       TextWrapping="Wrap" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

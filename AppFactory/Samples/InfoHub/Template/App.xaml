@@ -1,0 +1,27 @@
+﻿<Application
+    x:Class="InfoHub.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InfoHub">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Common/StandardStyles.xaml"/>
+                <!-- custom styles -->
+                <ResourceDictionary Source="Styles/Shared.xaml"/>
+                <ResourceDictionary Source="Styles/CalendarArticle.xaml"/>
+                <ResourceDictionary Source="Styles/FlickrArticle.xaml"/>
+                <ResourceDictionary Source="Styles/NewsArticle.xaml"/>
+                <ResourceDictionary Source="Styles/TwitterArticle.xaml"/>
+                <ResourceDictionary Source="Styles/WeatherArticle.xaml"/>
+                <ResourceDictionary Source="Styles/YouTubeArticle.xaml"/>
+                <ResourceDictionary Source="Styles/SummaryArticle.xaml"/>
+                <ResourceDictionary Source="Styles/NewsArticle.xaml"/>
+                <ResourceDictionary Source="Styles/AdvertArticle.xaml"/>
+                <ResourceDictionary Source="Styles/SnapView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

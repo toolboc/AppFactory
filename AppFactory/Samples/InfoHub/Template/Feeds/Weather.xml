@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">
+  <head>
+    <product concise-name="dwmlByDay" operational-mode="developmental" srsName="WGS 1984">
+      <creation-date refresh-frequency='PT1H'>2013-02-21T17:44:51-07:00</creation-date>
+      <category>current observations and forecast</category>
+    </product>
+    <source>
+      <production-center>Denver-Boulder, CO</production-center>
+      <credit>http://www.crh.noaa.gov/bou</credit>
+      <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+    </source>
+  </head>
+  <data type="forecast">
+
+    <location>
+      <location-key>point1</location-key>
+      <description>Denver, CO</description>
+      <point latitude="39.75" longitude="-104.99"/>
+      <city state="CO">Denver</city>
+      <height datum="mean sea level">5207</height>
+    </location>
+    <moreWeatherInformation applicable-location="point1">http://forecast.weather.gov/MapClick.php?lat=39.75&amp;lon=-104.99</moreWeatherInformation>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p6h-n1-1</layout-key>
+      <start-valid-time>2013-02-21T23:00:00-07:00</start-valid-time>
+      <end-valid-time>2013-02-28T18:00:00-07:00</end-valid-time>
+    </time-layout>
+
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p6h-n1-2</layout-key>
+      <start-valid-time>2013-02-21T23:00:00-07:00</start-valid-time>
+      <end-valid-time>2013-02-28T18:00:00-07:00</end-valid-time>
+    </time-layout>
+
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p12h-n14-1</layout-key>
+      <start-valid-time period-name="Overnight">2013-02-22T00:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Friday">2013-02-22T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Friday Night">2013-02-22T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Saturday">2013-02-23T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Saturday Night">2013-02-23T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Sunday">2013-02-24T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Sunday Night">2013-02-24T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Monday">2013-02-25T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Monday Night">2013-02-25T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Tuesday">2013-02-26T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Tuesday Night">2013-02-26T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Wednesday">2013-02-27T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Wednesday Night">2013-02-27T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Thursday">2013-02-28T06:00:00-07:00</start-valid-time>
+    </time-layout>
+
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p24h-n7-1</layout-key>
+      <start-valid-time period-name="Overnight">2013-02-22T00:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Friday Night">2013-02-22T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Saturday Night">2013-02-23T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Sunday Night">2013-02-24T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Monday Night">2013-02-25T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Tuesday Night">2013-02-26T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Wednesday Night">2013-02-27T18:00:00-07:00</start-valid-time>
+    </time-layout>
+
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p24h-n7-2</layout-key>
+      <start-valid-time period-name="Friday">2013-02-22T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Saturday">2013-02-23T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Sunday">2013-02-24T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Monday">2013-02-25T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Tuesday">2013-02-26T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Wednesday">2013-02-27T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Thursday">2013-02-28T06:00:00-07:00</start-valid-time>
+    </time-layout>
+
+
+    <parameters applicable-location="point1">
+
+      <temperature type="minimum" units="Fahrenheit" time-layout="k-p24h-n7-1">
+        <name>Daily Minimum Temperature</name>
+        <value>13</value>
+        <value>20</value>
+        <value>22</value>
+        <value>16</value>
+        <value>22</value>
+        <value>16</value>
+        <value>27</value>
+      </temperature>
+
+      <temperature type="maximum" units="Fahrenheit" time-layout="k-p24h-n7-2">
+        <name>Daily Maximum Temperature</name>
+        <value>37</value>
+        <value>46</value>
+        <value>37</value>
+        <value>37</value>
+        <value>41</value>
+        <value>45</value>
+        <value>46</value>
+      </temperature>
+
+      <probability-of-precipitation  type="12 hour" units="percent" time-layout="k-p12h-n14-1">
+        <name>12 Hourly Probability of Precipitation</name>
+        <value xsi:nil="true"></value>
+        <value>20</value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value>40</value>
+        <value>40</value>
+        <value>20</value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+      </probability-of-precipitation>
+
+      <weather time-layout="k-p12h-n14-1">
+        <name>Weather Type, Coverage, Intensity</name>
+        <weather-conditions weather-summary="Mostly Cloudy"/>
+        <weather-conditions weather-summary="Slight Chc Snow"/>
+        <weather-conditions weather-summary="Partly Cloudy"/>
+        <weather-conditions weather-summary="Increasing Clouds"/>
+        <weather-conditions weather-summary="Chance Snow"/>
+        <weather-conditions weather-summary="Chance Snow"/>
+        <weather-conditions weather-summary="Slight Chc Snow"/>
+        <weather-conditions weather-summary="Mostly Sunny"/>
+        <weather-conditions weather-summary="Partly Cloudy"/>
+        <weather-conditions weather-summary="Mostly Sunny"/>
+        <weather-conditions weather-summary="Slight Chc Snow"/>
+        <weather-conditions weather-summary="Mostly Sunny"/>
+        <weather-conditions weather-summary="Partly Cloudy"/>
+        <weather-conditions weather-summary="Mostly Sunny"/>
+      </weather>
+
+      <conditions-icon type="forecast-NWS" time-layout="k-p12h-n14-1">
+        <name>Conditions Icon</name>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nbkn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/sn20.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nsct.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/bkn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nsn40.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/sn40.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nsn20.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/sct.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nsct.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/sct.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nsn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/sct.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nsct.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/sct.png</icon-link>
+      </conditions-icon>
+
+      <hazards time-layout="k-p6h-n1-1">
+        <name>Watches, Warnings, and Advisories</name>
+        <hazard-conditions>
+          <hazard headline="Hazardous Weather Outlook">
+            <hazardTextURL>http://forecast.weather.gov/showsigwx.php?warnzone=COZ040&amp;warncounty=COC031&amp;firewxzone=COZ240&amp;local_place1=Denver+CO&amp;product1=Hazardous+Weather+Outlook</hazardTextURL>
+          </hazard>
+        </hazard-conditions>
+      </hazards>
+
+      <hazards time-layout="k-p6h-n1-2">
+        <name>Watches, Warnings, and Advisories</name>
+        <hazard-conditions>
+          <hazard headline="Short Term Forecast">
+            <hazardTextURL>http://forecast.weather.gov/showsigwx.php?warnzone=COZ040&amp;warncounty=COC031&amp;firewxzone=COZ240&amp;local_place1=Denver+CO&amp;product1=Short+Term+Forecast</hazardTextURL>
+          </hazard>
+        </hazard-conditions>
+      </hazards>
+
+      <wordedForecast time-layout="k-p12h-n14-1" dataSource="bouNetcdf" wordGenerator="markMitchell">
+        <name>Text Forecast</name>
+        <text>Mostly cloudy, with a low around 13. Calm wind becoming south southwest around 6 mph in the evening. </text>
+        <text>A 20 percent chance of snow showers after 11am.  Partly sunny, with a high near 37. Southwest wind around 6 mph becoming calm. </text>
+        <text>Partly cloudy, with a low around 20. Southwest wind 6 to 9 mph. </text>
+        <text>Increasing clouds, with a high near 46. South wind 5 to 9 mph becoming light and variable. </text>
+        <text>A 40 percent chance of snow.  Mostly cloudy, with a low around 22. North northwest wind 7 to 10 mph, with gusts as high as 16 mph. </text>
+        <text>A 40 percent chance of snow.  Mostly cloudy, with a high near 37. Breezy. </text>
+        <text>A 20 percent chance of snow.  Partly cloudy, with a low around 16.</text>
+        <text>Mostly sunny, with a high near 37.</text>
+        <text>Partly cloudy, with a low around 22.</text>
+        <text>Mostly sunny, with a high near 41.</text>
+        <text>A slight chance of snow.  Mostly cloudy, with a low around 16.</text>
+        <text>Mostly sunny, with a high near 45.</text>
+        <text>Partly cloudy, with a low around 27.</text>
+        <text>Mostly sunny, with a high near 46.</text>
+      </wordedForecast>
+
+    </parameters>
+  </data>
+  <data type="current observations">
+    <location>
+      <location-key>point1</location-key>
+      <point latitude="39.91" longitude="-105.12"/>
+      <area-description>Broomfield/Rocky Mtn Metro Airport, CO</area-description>
+      <height datum="mean sea level" height-units="feet">5656</height>
+    </location>
+    <moreWeatherInformation applicable-location="point1">http://www.nws.noaa.gov/data/obhistory/KBJC.html</moreWeatherInformation>
+    <time-layout time-coordinate="local">
+      <layout-key>k-p1h-n1-1</layout-key>
+      <start-valid-time period-name="current">2013-02-21T22:33:00-07:00</start-valid-time>
+    </time-layout>
+    <parameters applicable-location="point1">
+      <temperature type="apparent" units="Fahrenheit" time-layout="k-p1h-n1-1">
+        <value>21</value>
+      </temperature>
+      <temperature type="dew point" units="Fahrenheit" time-layout="k-p1h-n1-1">
+        <value>18</value>
+      </temperature>
+      <humidity type="relative" time-layout="k-p1h-n1-1">
+        <value>86</value>
+      </humidity>
+      <weather time-layout="k-p1h-n1-1">
+        <name>Weather Type, Coverage, Intensity</name>
+        <weather-conditions weather-summary="Mostly Cloudy"/>
+        <weather-conditions>
+          <value>
+            <visibility units="statute miles">10.00</visibility>
+          </value>
+        </weather-conditions>
+      </weather>
+      <conditions-icon type="forecast-NWS" time-layout="k-p1h-n1-1">
+        <name>Conditions Icon</name>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nbkn.png</icon-link>
+      </conditions-icon>
+      <direction type="wind" units="degrees true" time-layout="k-p1h-n1-1">
+        <value>140</value>
+      </direction>
+      <wind-speed type="gust" units="knots" time-layout="k-p1h-n1-1">
+        <value>NA</value>
+      </wind-speed>
+      <wind-speed type="sustained" units="knots" time-layout="k-p1h-n1-1">
+        <value>3</value>
+      </wind-speed>
+      <pressure type="barometer" units="inches of mercury" time-layout="k-p1h-n1-1">
+        <value>29.83</value>
+      </pressure>
+    </parameters>
+  </data>
+</dwml>

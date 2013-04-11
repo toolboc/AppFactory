@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:AppFactory_Converters="clr-namespace:AppFactory.Converters" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:AppFactory_ViewModels="clr-namespace:AppFactory.ViewModels" mc:Ignorable="d" x:Class="AppFactory.Views.BuildView"
+        xmlns:AppFactory_Converters="clr-namespace:AppFactory.Converters" xmlns:AppFactory_ViewModels="clr-namespace:AppFactory.ViewModels" mc:Ignorable="d" x:Class="AppFactory.Views.BuildView"
         Title="AppFactory" Height="350" Width="525" Background="{DynamicResource WindowBackgroundBrush}">
 	<Window.Resources>
 		<AppFactory_Converters:EnumBoolConverter x:Key="EnumBoolConverter"/>
@@ -42,9 +42,6 @@
         	<RowDefinition Height="Auto" />
         	<RowDefinition/>
         </Grid.RowDefinitions>
-    	<i:Interaction.Behaviors>
-    		<ei:DataStateBehavior Binding="{Binding BuildSettings}" Value="{x:Null}" TrueState="NoProject" FalseState="ProjectLoaded"/>
-    	</i:Interaction.Behaviors>
         <Grid x:Name="ProjectLayout" Margin="10">
         	<Grid.ColumnDefinitions>
         		<ColumnDefinition Width="Auto" />

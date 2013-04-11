@@ -178,7 +178,7 @@ namespace AppFactory.ViewModels
                 if (buildSettings != value)
                 {
                     buildSettings = value;
-                    RaisePropertyChanged(() => BuildSettings);
+                    RaisePropertyChanged(() => BuildSettings, buildSettings, value, true);
                 }
             }
         }

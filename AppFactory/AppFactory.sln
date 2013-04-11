@@ -23,8 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFactory", "UI\AppFactory
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsPhone", "WindowsPhone", "{D6C5AEF1-B52A-4A0C-8F70-DD08161601ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFactory.Tasks.WindowsPhone", "Tasks\WindowsPhone\AppFactory.Tasks.WindowsPhone.csproj", "{7B5212BB-D22A-4974-8E07-C1AF594A4229}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LocalPhone", "LocalPhone", "{A394BA5C-99AD-4073-A303-D2926DDBE7AA}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\LocalPhone\Applications.csv = Samples\LocalPhone\Applications.csv
@@ -40,28 +38,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HostedGaming", "HostedGamin
 		Samples\HostedGaming\Gaming.afproj = Samples\HostedGaming\Gaming.afproj
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InfoHub", "InfoHub", "{05366FE5-6B44-4212-8EE3-F415CB46EB61}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\InfoHub\InfoHub.accdb = Samples\InfoHub\InfoHub.accdb
+		Samples\InfoHub\InfoHub.afproj = Samples\InfoHub\InfoHub.afproj
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccLocalPath0 = .
-		SccLocalPath1 = Core
-		SccLocalPath2 = Tasks
-		SccLocalPath3 = UI
-		SccLocalPath4 = Tasks\\WindowsPhone
-		SccNumberOfProjects = 5
-		SccProjectName1 = Core
-		SccProjectName2 = Tasks
-		SccProjectName3 = UI
-		SccProjectName4 = Tasks/WindowsPhone
-		SccProjectTopLevelParentUniqueName1 = AppFactory.sln
-		SccProjectTopLevelParentUniqueName2 = AppFactory.sln
-		SccProjectTopLevelParentUniqueName3 = AppFactory.sln
-		SccProjectTopLevelParentUniqueName4 = AppFactory.sln
-		SccProjectUniqueName1 = Core\\AppFactory.Core.csproj
-		SccProjectUniqueName2 = Tasks\\AppFactory.Tasks.csproj
-		SccProjectUniqueName3 = UI\\AppFactory.csproj
-		SccProjectUniqueName4 = Tasks\\WindowsPhone\\AppFactory.Tasks.WindowsPhone.csproj
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs06
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Core\\AppFactory.Core.csproj
+		SccProjectTopLevelParentUniqueName1 = AppFactory.sln
+		SccProjectName1 = Core
+		SccLocalPath1 = Core
+		SccProjectUniqueName2 = Tasks\\AppFactory.Tasks.csproj
+		SccProjectTopLevelParentUniqueName2 = AppFactory.sln
+		SccProjectName2 = Tasks
+		SccLocalPath2 = Tasks
+		SccProjectUniqueName3 = UI\\AppFactory.csproj
+		SccProjectTopLevelParentUniqueName3 = AppFactory.sln
+		SccProjectName3 = UI
+		SccLocalPath3 = UI
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,26 +82,6 @@ Global
 		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3742307A-4FFA-4940-AED4-766EBC9C1A43}.Release|x86.ActiveCfg = Release|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|x86.ActiveCfg = Release|Any CPU
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|x86.ActiveCfg = Debug|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|x86.Build.0 = Debug|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Any CPU.ActiveCfg = Release|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Mixed Platforms.Build.0 = Release|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|x86.ActiveCfg = Release|x86
-		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|x86.Build.0 = Release|x86
 		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -112,17 +92,27 @@ Global
 		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DDC62A3B-1782-43BE-991B-6643DF1F8097}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|x86.ActiveCfg = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Debug|x86.Build.0 = Debug|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Any CPU.ActiveCfg = Release|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Mixed Platforms.Build.0 = Release|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|x86.ActiveCfg = Release|x86
+		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3742307A-4FFA-4940-AED4-766EBC9C1A43} = {D7F4965D-4BAB-4333-90EA-241FCE2B6550}
-		{7B5212BB-D22A-4974-8E07-C1AF594A4229} = {D6C5AEF1-B52A-4A0C-8F70-DD08161601ED}
-		{89A61E41-FA64-42CE-9608-8BA601DFEC01} = {0BFC5E76-D410-42F1-96D2-C392302918FE}
-		{A394BA5C-99AD-4073-A303-D2926DDBE7AA} = {0BFC5E76-D410-42F1-96D2-C392302918FE}
 		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF} = {8D731067-7B2D-4B79-BBBE-EC1D4DDE7EDA}
-		{D6C5AEF1-B52A-4A0C-8F70-DD08161601ED} = {EC0A0065-9B1B-4308-BF43-AE5AA461E7C6}
+		{A394BA5C-99AD-4073-A303-D2926DDBE7AA} = {0BFC5E76-D410-42F1-96D2-C392302918FE}
+		{89A61E41-FA64-42CE-9608-8BA601DFEC01} = {0BFC5E76-D410-42F1-96D2-C392302918FE}
+		{05366FE5-6B44-4212-8EE3-F415CB46EB61} = {0BFC5E76-D410-42F1-96D2-C392302918FE}
+		{3742307A-4FFA-4940-AED4-766EBC9C1A43} = {D7F4965D-4BAB-4333-90EA-241FCE2B6550}
 		{DDC62A3B-1782-43BE-991B-6643DF1F8097} = {EC0A0065-9B1B-4308-BF43-AE5AA461E7C6}
+		{D6C5AEF1-B52A-4A0C-8F70-DD08161601ED} = {EC0A0065-9B1B-4308-BF43-AE5AA461E7C6}
 	EndGlobalSection
 EndGlobal

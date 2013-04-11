@@ -37,6 +37,8 @@ using System.Windows.Shapes;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Threading;
+using GalaSoft.MvvmLight.Messaging;
+using AppFactory.Data;
 
 namespace AppFactory.Views
 {
@@ -48,6 +50,24 @@ namespace AppFactory.Views
         public BuildView()
         {
             InitializeComponent();
+            RegisterForMessages();
+        }
+
+        private void RegisterForMessages()
+        {
+            Messenger.Default.Register<PropertyChangedMessage<BuildSettings>>(this, BuildSettingsChanged);
+        }
+
+        private void BuildSettingsChanged(PropertyChangedMessage<BuildSettings> settings)
+        {
+            if (settings == null)
+            {
+                VisualStateManager.GoToElementState(LayoutRoot, "NoProject", true);
+            }
+            else
+            {
+                VisualStateManager.GoToElementState(LayoutRoot, "ProjectLoaded", true);
+            }
         }
 
         private void BuildButton_Click(object sender, RoutedEventArgs e)
