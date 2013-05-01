@@ -23,7 +23,7 @@
     <AppSelectMethod>WhereQuery</AppSelectMethod>
 
     <!-- The 'WHERE' clause used to select applications when AppSelectMethod is set to 'WhereQuery' -->
-    <WhereQuery>AppName='LouisianaStateUniversity'</WhereQuery>
+    <WhereQuery>AppName='FooSampleAppJB'</WhereQuery>
 
     <!-- The custom query used to select applications when AppSelectMethod is set to 'CustomQuery' -->
     <CustomQuery>SELECT * FROM Applications</CustomQuery>
@@ -145,17 +145,16 @@
     <ItemGroup>
       <AssetFiles Include="$(AssetsPath)\%(Application.AppName)\**\*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(AssetFiles)" DestinationFolder="$(WorkingPath)\$(AssetsPath)\%(RecursiveDir)" />
+    <Copy SourceFiles="@(AssetFiles)" DestinationFolder="$(WorkingPath)\%(RecursiveDir)" />
     
 	<!-- Replace Values -->
     
     <!-- Include the files we'd like to replace values in (detokenize) -->
     <ItemGroup>
       <DetokenizeFiles Include="$(WorkingPath)\Package.appxmanifest" />
-	  <DetokenizeFiles Include="$(WorkingPath)\Package.StoreAssociation.xml" />
-	  <DetokenizeFiles Include="$(WorkingPath)\AppHubViewModel.1.cs" />
-	  <DetokenizeFiles Include="$(WorkingPath)\Styles\Shared.xaml" />
-	  <DetokenizeFiles Include="$(WorkingPath)\Styles\AdvertArticle.xaml" />
+	    <DetokenizeFiles Include="$(WorkingPath)\AppHubViewModel.1.cs" />
+	    <DetokenizeFiles Include="$(WorkingPath)\Styles\Shared.xaml" />
+	    <DetokenizeFiles Include="$(WorkingPath)\Styles\AdvertArticle.xaml" />
     </ItemGroup>
     <Message Text="Injecting Application.* values into %(DetokenizeFiles.Identity)" Importance="high" />
 

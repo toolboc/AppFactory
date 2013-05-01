@@ -17,7 +17,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <PackageCertificateThumbprint>DDC21161A937C6FF5D8C7BE93E23B75B7B1ED6A1</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>29F3791D7AF032FEE93B6A7E01C7152EA56BFC19</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -165,7 +165,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="InfoHub_StoreKey.pfx" />
     <None Include="InfoHub_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +179,6 @@
     <Content Include="Assets\AltAdvert.jpg" />
     <Content Include="Assets\Background.jpg" />
     <Content Include="Assets\SummaryImage.png" />
-    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
