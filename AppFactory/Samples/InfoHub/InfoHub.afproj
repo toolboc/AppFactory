@@ -20,7 +20,7 @@
   <PropertyGroup Label="UISettings">
 
     <!-- The method used to select which applications should be built. [All, NotBuiltSince, WhereQuery or CustomQuery] -->
-    <AppSelectMethod>WhereQuery</AppSelectMethod>
+    <AppSelectMethod>All</AppSelectMethod>
 
     <!-- The 'WHERE' clause used to select applications when AppSelectMethod is set to 'WhereQuery' -->
     <WhereQuery>AppName='FooSampleAppJB'</WhereQuery>
@@ -147,14 +147,13 @@
     </ItemGroup>
     <Copy SourceFiles="@(AssetFiles)" DestinationFolder="$(WorkingPath)\%(RecursiveDir)" />
     
-	<!-- Replace Values -->
+	  <!-- Replace Values -->
     
     <!-- Include the files we'd like to replace values in (detokenize) -->
     <ItemGroup>
       <DetokenizeFiles Include="$(WorkingPath)\Package.appxmanifest" />
-	    <DetokenizeFiles Include="$(WorkingPath)\AppHubViewModel.1.cs" />
-	    <DetokenizeFiles Include="$(WorkingPath)\Styles\Shared.xaml" />
-	    <DetokenizeFiles Include="$(WorkingPath)\Styles\AdvertArticle.xaml" />
+	    <DetokenizeFiles Include="$(WorkingPath)\**\*.xaml" />
+      <DetokenizeFiles Include="$(WorkingPath)\**\*.cs" />
     </ItemGroup>
     <Message Text="Injecting Application.* values into %(DetokenizeFiles.Identity)" Importance="high" />
 
@@ -166,7 +165,19 @@
     <!-- Actually replace values (detokenize) -->
     <Detokenise TaskAction="Detokenise" TargetFiles="@(DetokenizeFiles)" ReplacementValues="@(ReplacementValues)" />	
 	
-	<!-- AppX Settings -->
+    <!-- Update the Package.appxmanifest (since tokenizing some parts of the file confuses Visual Studio) -->
+    <!-- Note: Identity.Publisher (CN) seems to be replaced with what's in the PFX file automatically during the signing process... -->
+    <Message Text="Updating Package.appxmanifest" Importance="high" />
+    <ItemGroup>
+      <Namespaces Include="manifest">
+        <Prefix>man</Prefix>
+        <Uri>http://schemas.microsoft.com/appx/2010/manifest</Uri>
+      </Namespaces>
+    </ItemGroup>
+    <XmlFile TaskAction="UpdateAttribute" Namespaces="@(Namespaces)" File="$(WorkingPath)\Package.appxmanifest" XPath="/man:Package/man:Identity" Key="Name" Value="%(Application.PubPrefix).%(Application.AppName)" />
+    <XmlFile TaskAction="UpdateAttribute" Namespaces="@(Namespaces)" File="$(WorkingPath)\Package.appxmanifest" XPath="/man:Package/man:Identity" Key="Version" Value="%(Application.Version)" />
+    
+	  <!-- AppX Settings -->
     <Message Text="Setting AppX Settings" Importance="high" />
     <PropertyGroup>
       <AppxPackageDir>AppPackages\</AppxPackageDir>

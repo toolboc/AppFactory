@@ -158,7 +158,7 @@ namespace InfoHub
             public const string ShareTitle = "$(Application.Title) Information";
 
             // set to false to hide ads everywhere hardcoded
-            public static bool IncludeAdvertising = $(Application.AdEnabled); // in general this should be left to true
+            public static bool IncludeAdvertising = bool.Parse("$(Application.AdEnabled)"); // in general this should be left to true
             public static bool SimulatePurchasing = System.Diagnostics.Debugger.IsAttached;
 
             // get your ad values from http://pubcenter.microsoft.com
