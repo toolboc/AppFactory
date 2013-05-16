@@ -50,9 +50,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InfoHubPhone8", "InfoHubPho
 		Samples\InfoHubPhone8\InfoHubPhone8.afproj = Samples\InfoHubPhone8\InfoHubPhone8.afproj
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFactory.Tasks.WindowsPhone", "Tasks\WindowsPhone\AppFactory.Tasks.WindowsPhone.csproj", "{7B5212BB-D22A-4974-8E07-C1AF594A4229}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs06
 		SccLocalPath0 = .
@@ -68,6 +70,10 @@ Global
 		SccProjectTopLevelParentUniqueName3 = AppFactory.sln
 		SccProjectName3 = UI
 		SccLocalPath3 = UI
+		SccProjectUniqueName4 = Tasks\\WindowsPhone\\AppFactory.Tasks.WindowsPhone.csproj
+		SccProjectTopLevelParentUniqueName4 = AppFactory.sln
+		SccProjectName4 = Tasks/WindowsPhone
+		SccLocalPath4 = Tasks\\WindowsPhone
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +114,16 @@ Global
 		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|Mixed Platforms.Build.0 = Release|x86
 		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|x86.ActiveCfg = Release|x86
 		{AAA9DBB3-7B08-46A2-96B7-463B3E3D43DF}.Release|x86.Build.0 = Release|x86
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,5 +137,6 @@ Global
 		{3742307A-4FFA-4940-AED4-766EBC9C1A43} = {D7F4965D-4BAB-4333-90EA-241FCE2B6550}
 		{DDC62A3B-1782-43BE-991B-6643DF1F8097} = {EC0A0065-9B1B-4308-BF43-AE5AA461E7C6}
 		{D6C5AEF1-B52A-4A0C-8F70-DD08161601ED} = {EC0A0065-9B1B-4308-BF43-AE5AA461E7C6}
+		{7B5212BB-D22A-4974-8E07-C1AF594A4229} = {D6C5AEF1-B52A-4A0C-8F70-DD08161601ED}
 	EndGlobalSection
 EndGlobal
